@@ -1,0 +1,1 @@
+"""LabelRadar application package."""

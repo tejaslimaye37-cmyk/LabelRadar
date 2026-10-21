@@ -1,0 +1,1 @@
+"""LabelRadar test suite."""
