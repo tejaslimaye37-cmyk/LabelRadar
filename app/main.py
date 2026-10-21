@@ -2,6 +2,7 @@
 
 from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
+from typing import Any
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -63,6 +64,21 @@ def create_application() -> FastAPI:
     application.include_router(api_router, prefix=settings.API_V1_PREFIX)
     # Also mount directly at root for convenience (/ingest, /changes, /health)
     application.include_router(api_router)
+
+    @application.get("/", tags=["root"])
+    async def root() -> dict[str, Any]:
+        """Root endpoint with service metadata and documentation links."""
+        return {
+            "service": settings.APP_NAME,
+            "version": "0.1.0",
+            "description": "Regulatory drug label-change intelligence platform",
+            "docs_url": "/docs",
+            "health_url": "/health",
+            "endpoints": {
+                "ingest": "POST /ingest",
+                "changes": "GET /changes?drug_name={drug_name}",
+            },
+        }
 
     return application
 

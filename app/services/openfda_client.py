@@ -40,10 +40,11 @@ class OpenFDAClient:
     ) -> list[OpenFDALabelRecord]:
         """Queries openFDA for drug label records and returns parsed versions chronologically."""
         clean_drug = drug_name.strip()
+        has_valid_set_id = bool(spl_set_id and spl_set_id.strip() and spl_set_id.strip().lower() != "string")
 
         # Build openFDA search expression
-        if spl_set_id:
-            search_query = f'openfda.spl_set_id:"{spl_set_id}"'
+        if has_valid_set_id:
+            search_query = f'openfda.spl_set_id:"{spl_set_id.strip()}"'
         else:
             # Match brand_name, generic_name, or substance_name
             escaped_drug = clean_drug.replace('"', '\\"')

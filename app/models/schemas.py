@@ -10,9 +10,23 @@ from app.models.graph import ChangeType
 class IngestRequest(BaseModel):
     """Payload to trigger ingestion of drug label versions from openFDA."""
 
-    drug_name: str = Field(..., description="Brand name, generic name, or substance name (e.g. Lipitor, semaglutide)")
-    spl_set_id: str | None = Field(None, description="Optional specific SPL Set ID if known")
-    max_versions: int = Field(20, ge=1, le=100, description="Max label versions to fetch and diff")
+    drug_name: str = Field(
+        ...,
+        description="Brand name, generic name, or substance name (e.g. Lipitor, semaglutide, acetaminophen)",
+        examples=["Lipitor"],
+    )
+    spl_set_id: str | None = Field(
+        default=None,
+        description="Optional specific SPL Set ID GUID if known. Leave null or empty to search by drug name.",
+        examples=[None],
+    )
+    max_versions: int = Field(
+        20,
+        ge=1,
+        le=100,
+        description="Max label versions to fetch and diff",
+        examples=[10],
+    )
 
 
 class VersionSummary(BaseModel):
