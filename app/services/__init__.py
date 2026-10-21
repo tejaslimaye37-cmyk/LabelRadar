@@ -22,3 +22,4 @@ __all__ = [
     "DrugNotFoundError",
     "get_openfda_client",
 ]
+

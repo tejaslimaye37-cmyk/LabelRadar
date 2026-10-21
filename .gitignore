@@ -41,3 +41,4 @@ htmlcov/
 # Data & Docker
 postgres_data/
 neo4j_data/
+

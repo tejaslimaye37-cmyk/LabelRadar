@@ -25,3 +25,4 @@ def setup_logging(debug: bool = False) -> logging.Logger:
 
 
 logger = logging.getLogger("labelradar")
+

@@ -105,3 +105,4 @@ def test_compute_sha256():
     assert h1 == h2
     assert h1 != h3
     assert len(h1) == 64
+

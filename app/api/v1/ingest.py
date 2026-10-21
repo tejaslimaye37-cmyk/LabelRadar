@@ -41,3 +41,4 @@ async def ingest_drug_labels(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Ingestion failed: {exc}",
         ) from exc
+

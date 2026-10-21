@@ -78,3 +78,4 @@ async def test_fetch_labels_with_spl_set_id(test_settings: Settings):
             assert route.called
             called_params = route.calls.last.request.url.params
             assert 'openfda.spl_set_id:"spl-set-lipitor-001"' in called_params["search"]
+

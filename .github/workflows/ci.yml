@@ -72,3 +72,4 @@ jobs:
           LLM_MODEL: qwen2.5:latest
         run: |
           pytest -v --cov=app --cov-report=term-missing
+

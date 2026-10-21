@@ -106,3 +106,4 @@ MOCK_OPENFDA_LIPITOR_RESPONSE = {
         LIPITOR_V3_RAW,
     ],
 }
+

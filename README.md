@@ -244,3 +244,4 @@ ruff check app tests
 - [ ] **Milestone 4**: MCP server wrapper & analyst agent for multi-drug queries
 - [ ] **Milestone 5**: Prompt-injection robustness suite inside ingested label text
 - [ ] **Milestone 6**: Analyst benchmark report and commercial forecasting analysis
+

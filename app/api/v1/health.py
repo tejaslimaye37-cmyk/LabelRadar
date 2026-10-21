@@ -31,3 +31,4 @@ async def check_health(
             "postgres": "connected" if postgres_ok else "unreachable",
         },
     )
+

@@ -169,3 +169,4 @@ async def test_get_drug_change_timeline_cypher_flow():
     assert trans.to_version_id == "v2"
     assert trans.changes[0].section_name == "boxed_warning"
     assert trans.changes[0].change_type == ChangeType.ADDED
+
