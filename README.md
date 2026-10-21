@@ -1,4 +1,4 @@
-# 📡 LabelRadar: Regulatory Drug Label-Change Intelligence
+# LabelRadar: Regulatory Drug Label-Change Intelligence
 
 [![CI - Lint & Test](https://github.com/tejaslimaye/LabelRadar/actions/workflows/ci.yml/badge.svg)](https://github.com/tejaslimaye/LabelRadar/actions)
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/release/python-3120/)
@@ -11,7 +11,7 @@
 
 ---
 
-## 🏗️ Architecture & Graph Schema
+## Architecture & Graph Schema
 
 LabelRadar ingests structured product labeling (SPL) documents directly from openFDA, preserves each chronological label version with its effective date, computes granular section-by-section diffs, and constructs a specialized regulatory change graph in **Neo4j** backed by dual-persistence in **PostgreSQL + pgvector**.
 
@@ -39,7 +39,7 @@ graph TD
 
 ---
 
-## ⚡ Tech Stack
+## Tech Stack
 
 - **Python 3.12** & **FastAPI (async)**
 - **Pydantic v2** & **pydantic-settings**
@@ -52,7 +52,7 @@ graph TD
 
 ---
 
-## 🚀 Quickstart
+## Quickstart
 
 ### 1. Local Setup with Virtual Environment
 
@@ -88,7 +88,7 @@ Service endpoints:
 
 ---
 
-## 🔧 LLM Configuration: Local Ollama / MLX / Remote API
+## LLM Configuration: Local Ollama / MLX / Remote API
 
 LabelRadar uses standard OpenAI-compatible completions, allowing instant switching between local models and hosted APIs without code modifications.
 
@@ -117,7 +117,7 @@ LLM_MODEL=gpt-4o-mini
 
 ---
 
-## 📡 API Reference
+## API Reference
 
 ### 1. Ingest Drug Labels (`POST /ingest` or `POST /api/v1/ingest`)
 Fetches all historical revisions from openFDA, orders them chronologically, computes section-by-section diffs, and constructs the Neo4j graph and PostgreSQL records.
@@ -219,7 +219,7 @@ Verifies health of the service, Neo4j connectivity, and PostgreSQL database.
 
 ---
 
-## 🧪 Testing & Linting
+## Testing & Linting
 
 Run all unit and integration tests with coverage:
 
@@ -235,13 +235,3 @@ ruff check app tests
 ```
 
 ---
-
-## 🗺️ Flagship Milestones Roadmap
-
-- [x] **Milestone 1**: Ingestion pipeline + section differ + Neo4j graph schema + `/changes` endpoint + Docker + CI
-- [ ] **Milestone 2**: Hybrid retrieval API (`/ask`) combining Neo4j graph traversal + pgvector embeddings with version citations
-- [ ] **Milestone 3**: Ground-truth evaluation harness (~15 public FDA changes + ~25 multi-hop questions reporting hit@k and answer faithfulness)
-- [ ] **Milestone 4**: MCP server wrapper & analyst agent for multi-drug queries
-- [ ] **Milestone 5**: Prompt-injection robustness suite inside ingested label text
-- [ ] **Milestone 6**: Analyst benchmark report and commercial forecasting analysis
-
