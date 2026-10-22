@@ -22,11 +22,11 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     logger.info("Starting up %s (env: %s)...", settings.APP_NAME, settings.APP_ENV)
 
     # Initialize Neo4j schema
-    neo4j = get_neo4j_manager(settings=settings)
+    neo4j = get_neo4j_manager()
     await neo4j.init_schema()
 
     # Initialize PostgreSQL tables and pgvector extension
-    postgres = get_postgres_manager(settings=settings)
+    postgres = get_postgres_manager()
     await postgres.init_db()
 
     yield

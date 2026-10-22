@@ -2,7 +2,6 @@
 
 from typing import Any
 
-from fastapi import Depends
 from openai import AsyncOpenAI
 
 from app.core.config import Settings, get_settings
@@ -60,9 +59,9 @@ class LLMService:
 _llm_service: LLMService | None = None
 
 
-def get_llm_service(settings: Settings = Depends(get_settings)) -> LLMService:
+def get_llm_service() -> LLMService:
     """Dependency provider / singleton accessor for LLMService."""
     global _llm_service
-    if _llm_service is None or settings is not None:
-        _llm_service = LLMService(settings=settings)
+    if _llm_service is None:
+        _llm_service = LLMService(settings=get_settings())
     return _llm_service

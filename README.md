@@ -233,5 +233,3 @@ pytest -v --cov=app --cov-report=term-missing
 # Run Ruff linter
 ruff check app tests
 ```
-
----

@@ -3,7 +3,6 @@
 from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
 
-from fastapi import Depends
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import (
     AsyncEngine,
@@ -94,11 +93,17 @@ class PostgresManager:
 _postgres_manager: PostgresManager | None = None
 
 
-def get_postgres_manager(settings: Settings = Depends(get_settings)) -> PostgresManager:
+def get_postgres_manager(
+    settings: Settings | None = None,
+) -> PostgresManager:
     """Dependency provider / singleton for PostgresManager."""
     global _postgres_manager
-    if _postgres_manager is None or settings is not None:
-        _postgres_manager = PostgresManager(settings=settings)
+
+    if _postgres_manager is None:
+        _postgres_manager = PostgresManager(
+            settings=settings or get_settings()
+        )
+
     return _postgres_manager
 
 

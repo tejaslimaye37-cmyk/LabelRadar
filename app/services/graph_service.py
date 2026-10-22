@@ -221,9 +221,9 @@ class GraphService:
 _graph_service: GraphService | None = None
 
 
-def get_graph_service(manager: Neo4jManager = Depends(get_neo4j_manager)) -> GraphService:
+def get_graph_service() -> GraphService:
     """Dependency provider for GraphService."""
     global _graph_service
-    if _graph_service is None or manager is not None:
-        _graph_service = GraphService(manager=manager)
+    if _graph_service is None:
+        _graph_service = GraphService(manager=get_neo4j_manager())
     return _graph_service

@@ -294,17 +294,13 @@ class IngestionService:
 _ingestion_service: IngestionService | None = None
 
 
-def get_ingestion_service(
-    openfda: OpenFDAClient = Depends(get_openfda_client),
-    graph: GraphService = Depends(get_graph_service),
-    pg: PostgresManager = Depends(get_postgres_manager),
-) -> IngestionService:
+def get_ingestion_service() -> IngestionService:
     """Dependency provider for IngestionService."""
     global _ingestion_service
-    if _ingestion_service is None or any([openfda, graph, pg]):
+    if _ingestion_service is None:
         _ingestion_service = IngestionService(
-            openfda_client=openfda,
-            graph_service=graph,
-            postgres_manager=pg,
+            openfda_client=get_openfda_client(),
+            graph_service=get_graph_service(),
+            postgres_manager=get_postgres_manager(),
         )
     return _ingestion_service

@@ -3,7 +3,6 @@
 from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
 
-from fastapi import Depends
 from neo4j import AsyncDriver, AsyncGraphDatabase, AsyncSession
 
 from app.core.config import Settings, get_settings
@@ -91,9 +90,15 @@ class Neo4jManager:
 _neo4j_manager: Neo4jManager | None = None
 
 
-def get_neo4j_manager(settings: Settings = Depends(get_settings)) -> Neo4jManager:
+def get_neo4j_manager(
+    settings: Settings | None = None,
+) -> Neo4jManager:
     """Dependency provider / singleton for Neo4jManager."""
     global _neo4j_manager
-    if _neo4j_manager is None or settings is not None:
-        _neo4j_manager = Neo4jManager(settings=settings)
+
+    if _neo4j_manager is None:
+        _neo4j_manager = Neo4jManager(
+            settings=settings or get_settings()
+        )
+
     return _neo4j_manager
