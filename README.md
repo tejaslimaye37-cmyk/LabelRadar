@@ -1,6 +1,5 @@
 # LabelRadar: Regulatory Drug Label-Change Intelligence
 
-[![CI - Lint & Test](https://github.com/tejaslimaye/LabelRadar/actions/workflows/ci.yml/badge.svg)](https://github.com/tejaslimaye/LabelRadar/actions)
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/release/python-3120/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688.svg)](https://fastapi.tiangolo.com)
 [![Neo4j](https://img.shields.io/badge/Neo4j-5.20+-008CC1.svg)](https://neo4j.com)
