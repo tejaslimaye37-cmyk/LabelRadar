@@ -3,11 +3,9 @@
 import io
 import re
 import urllib.parse
-import zipfile
 import xml.etree.ElementTree as ET
-
+import zipfile
 from datetime import datetime
-from typing import Any
 
 import httpx
 
@@ -83,6 +81,11 @@ class OpenFDAClient:
             "https://dailymed.nlm.nih.gov/dailymed/services/v2/"
             f"spls/{urllib.parse.quote(set_id, safe='')}/history.json"
         )
+        
+        response = await client.get(history_url)
+        response.raise_for_status()
+
+        payload = response.json()
 
         logger.info(
             "DailyMed history versions: %s",
@@ -91,11 +94,7 @@ class OpenFDAClient:
                 for item in payload.get("data", {}).get("history", [])
             ],
         )
-        
-        response = await client.get(history_url)
-        response.raise_for_status()
 
-        payload = response.json()
         history = payload.get("data", {}).get("history", [])
 
         if not history:
@@ -384,7 +383,7 @@ class OpenFDAClient:
                 )
             )
 
-            if resolved_set_id and (has_valid_set_id or len(records) <= 1):
+            if resolved_set_id and len(records) <= 1:
                 try:
                     historical_records = await self._fetch_dailymed_history(
                         client=client,

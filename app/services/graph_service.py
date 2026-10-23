@@ -1,8 +1,6 @@
 """Neo4j graph service managing Drug, LabelVersion, and Section nodes and diff edges."""
 
 
-from fastapi import Depends
-
 from app.db.neo4j import Neo4jManager, get_neo4j_manager
 from app.models.graph import ChangedToEdge, DrugNode, LabelVersionNode, SectionNode
 from app.models.schemas import (

@@ -1,7 +1,6 @@
 """Ingestion pipeline coordinating openFDA retrieval, diffing, and dual-persistence."""
 
 
-from fastapi import Depends
 from sqlalchemy import select
 
 from app.core.logging import logger

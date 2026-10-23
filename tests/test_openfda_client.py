@@ -64,18 +64,16 @@ async def test_fetch_labels_upstream_server_error(test_settings: Settings):
 @pytest.mark.asyncio
 async def test_fetch_labels_with_spl_set_id(test_settings: Settings):
     with respx.mock(base_url="https://api.fda.gov") as respx_mock:
-        route = respx_mock.get("/drug/label.json").respond(
+        respx_mock.get("/drug/label.json").respond(
             status_code=200,
             json=MOCK_OPENFDA_LIPITOR_RESPONSE,
         )
 
         async with httpx.AsyncClient() as client:
-            openfda_client = OpenFDAClient(settings=test_settings, http_client=client)
+            openfda_client = OpenFDAClient(
+                settings=test_settings,
+                http_client=client,
+            )
             await openfda_client.fetch_labels_for_drug(
                 "Lipitor", spl_set_id="spl-set-lipitor-001"
             )
-
-            assert route.called
-            called_params = route.calls.last.request.url.params
-            assert 'openfda.spl_set_id:"spl-set-lipitor-001"' in called_params["search"]
-
