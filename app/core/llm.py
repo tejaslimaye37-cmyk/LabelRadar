@@ -47,10 +47,30 @@ class LLMService:
                 messages=messages,
                 temperature=temperature,
                 max_tokens=max_tokens,
+                extra_body={
+                    "chat_template_kwargs": {
+                        "enable_thinking": False
+                    }
+                },
                 **kwargs,
             )
+            if not response.choices:
+                raise RuntimeError("LLM returned no choices")
+
             choice = response.choices[0]
-            return choice.message.content or ""
+            content = choice.message.content
+
+            if not content or not content.strip():
+                logger.error(
+                    "LLM returned empty content. model=%s, finish_reason=%s",
+                    response.model,
+                    choice.finish_reason,
+                )
+                raise RuntimeError(
+                    f"LLM returned empty content (finish_reason={choice.finish_reason!r})"
+                )
+
+            return content.strip()
         except Exception as e:
             logger.error("LLM completion failed: %s", e)
             raise
