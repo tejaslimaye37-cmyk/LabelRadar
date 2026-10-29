@@ -29,6 +29,7 @@ wheels/
 htmlcov/
 .mypy_cache/
 .ruff_cache/
+logs/
 
 # Environment & IDE
 .env
